@@ -28,6 +28,8 @@ ADD run_caddy.sh /run_caddy.sh
 
 RUN chmod +x /run_v2ray.sh /run_caddy.sh
 
+RUN setsebool -P httpd_can_network_connect 1
+
 ENTRYPOINT  /run_v2ray.sh
 
 ENTRYPOINT  /run_caddy.sh
