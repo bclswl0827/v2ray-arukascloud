@@ -9,8 +9,8 @@ RUN apk add --no-cache --virtual .build-deps ca-certificates curl \
  && unzip /v2ray/v2ray.zip \
  && chmod +x /v2ray/v2ray /v2ray/v2ctl \
  && rm -rf /v2ray/v2ray.zip /v2ray/v2ray.sig /v2ray/v2ctl.sig /v2ray/doc /v2ray/config.json /v2ray/vpoint_socks_vmess.json /v2ray/systemv /v2ray/systemd /v2ray/vpoint_vmess_freedom.json \
- && touch /v2ray/config.json
- && cd /caddy
+ && touch /v2ray/config.json \
+ && cd /caddy \
  && curl -L -H "Cache-Control: no-cache" -o caddy.tar.gz https://github.com/mholt/caddy/releases/download/v$CADDYVER/caddy_v$CADDYVER_linux_amd64.tar.gz \
  && tar -xzf /caddy/caddy.tar.gz -C /caddy \
  && chmod +x /caddy/caddy \
