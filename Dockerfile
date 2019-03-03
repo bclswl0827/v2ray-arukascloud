@@ -2,7 +2,7 @@ FROM alpine:latest
 
 ENV UUID=dd4523c3-fa0a-4aa3-acfe-0a49c7f643ce V2RAYVER=4.15.0 V2RAYPATH=/ws ENDPOINT=none
 
-RUN apk add --no-cache --virtual .build-deps ca-certificates curl wget \
+RUN apk add --no-cache --virtual .build-deps ca-certificates curl wget screen \
  && mkdir -m 777 /v2ray /caddy /caddy/wwwroot \
  && cd /v2ray \
  && curl -L -H "Cache-Control: no-cache" -o v2ray.zip https://github.com/v2ray/v2ray-core/releases/download/v$V2RAYVER/v2ray-linux-64.zip \
