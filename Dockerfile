@@ -12,7 +12,7 @@ RUN apk add --no-cache --virtual .build-deps ca-certificates curl \
  && touch /v2ray/config.json \
  && cd /caddy \
  && curl -L -H "Cache-Control: no-cache" -o caddy.tar.gz https://github.com/mholt/caddy/releases/download/v$CADDYVER/caddy_v$CADDYVER_linux_amd64.tar.gz \
- && tar -xzf /caddy/caddy.tar.gz -C /caddy \
+ && tar -xvf /caddy/caddy.tar.gz -C /caddy \
  && chmod +x /caddy/caddy \
  && rm -rf /caddy/init /caddy/CHANGES.txt /caddy/README.txt /caddy/LICENSES.txt /caddy/EULA.txt \
  && echo -e "0.0.0.0:80 {\n    root /caddy/wwwroot\n    timeouts 10m\n    proxy /ws 127.0.0.1:3050 {\n        websocket\n        header_upstream -Origin\n    }\n}" > /caddy/Caddyfile \
