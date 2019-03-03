@@ -15,7 +15,7 @@ RUN apk add --no-cache --virtual .build-deps ca-certificates curl wget \
  && tar -xvf /caddy/caddy_v0.11.4_linux_amd64.tar.gz -C /caddy \
  && chmod +x /caddy/caddy \
  && rm -rf /caddy/caddy_v0.11.4_linux_amd64.tar.gz /caddy/init /caddy/CHANGES.txt /caddy/README.txt /caddy/LICENSES.txt /caddy/EULA.txt \
- && echo -e "endpoint.arukascloud.io:80 {\n    root /caddy/wwwroot\n    gzip\n    tls off\n    proxy /ws 127.0.0.1:30000 {\n        websocket\n        header_upstream -Origin\n    }\n}" > /caddy/Caddyfile \
+ && echo -e "endpoint.arukascloud.io {\n    root /caddy/wwwroot\n    gzip\n    tls off\n    proxy v2raypath 127.0.0.1:30000 {\n        websocket\n        header_upstream -Origin\n    }\n}" > /caddy/Caddyfile \
  && echo -e '{"inbounds":[{"port":1080,"listen":"127.0.0.1","protocol":"socks","sniffing":{"enabled":true,"destOverride":["http","tls"]},"settings":{"auth":"noauth","udp":false}}],"outbounds":[{"protocol":"vmess","settings":{"vnext":[{"address":"endpoint.arukascloud.io","port":443,"users":[{"id":"uuid","alterId":64}]}]},"streamSettings":{"network":"ws","security":"tls","wsSettings":{"path":"v2raypath"}}}]}' > /caddy/wwwroot/config.json \
  && chgrp -R 0 /v2ray /caddy \
  && chmod -R g+rwX /v2ray /caddy
