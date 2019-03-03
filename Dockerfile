@@ -2,7 +2,7 @@ FROM alpine:latest
 
 ENV UUID=dd4523c3-fa0a-4aa3-acfe-0a49c7f643ce V2RAYVER=4.15.0 V2RAYPATH=/ws ENDPOINT=none
 
-RUN apk add --no-cache --virtual .build-deps ca-certificates curl wget screen \
+RUN apk add --no-cache --virtual .build-deps ca-certificates curl wget \
  && mkdir -m 777 /v2ray /caddy /caddy/wwwroot \
  && cd /v2ray \
  && curl -L -H "Cache-Control: no-cache" -o v2ray.zip https://github.com/v2ray/v2ray-core/releases/download/v$V2RAYVER/v2ray-linux-64.zip \
@@ -22,10 +22,14 @@ RUN apk add --no-cache --virtual .build-deps ca-certificates curl wget screen \
 
 ADD index.html /caddy/wwwroot/index.html
 
-ADD entrypoint.sh /entrypoint.sh
+ADD run_v2ray.sh /run_v2ray.sh
 
-RUN chmod +x /entrypoint.sh 
+ADD run_caddy.sh /run_caddy.sh
 
-ENTRYPOINT  /entrypoint.sh 
+RUN chmod +x /run_v2ray.sh /run_caddy.sh
+
+ENTRYPOINT  /run_v2ray.sh
+
+ENTRYPOINT  /run_caddy.sh
 
 EXPOSE 8080
