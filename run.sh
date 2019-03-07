@@ -11,5 +11,5 @@ sed -i "s/uuid/$UUID/g" wwwroot/config.json
 sed -i "s/v2raypath/$RAY/g" wwwroot/config.json
 sed -i "s/endpoint/$ENDPOINT/g" wwwroot/config.json
 # Run V2Ray & Caddy
-screen -dmS v2ray /v2ray/v2ray -config=/v2ray/config.json
-screen -dmS caddy /caddy/caddy -conf=/caddy/Caddyfile
+nohup /v2ray/v2ray -config=/v2ray/config.json >v2ray.out 2>&1 &
+nohup /caddy/caddy -conf=/caddy/Caddyfile >caddy.out 2>&1 &
