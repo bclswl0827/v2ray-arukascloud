@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-ENV UUID=dd4523c3-fa0a-4aa3-acfe-0a49c7f643ce VER=4.15.0 PATH=/ws ENDPOINT=none
+ENV UUID=dd4523c3-fa0a-4aa3-acfe-0a49c7f643ce VER=4.15.0 RAY=/ws ENDPOINT=none
 
 RUN apk add --no-cache --virtual .build-deps ca-certificates curl screen \
  && mkdir -m 777 /v2ray /caddy /caddy/wwwroot \
