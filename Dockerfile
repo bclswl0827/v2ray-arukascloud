@@ -13,8 +13,8 @@ RUN apk add --no-cache --virtual .build-deps ca-certificates curl screen \
  && cd /caddy \
  && curl -L -H "Cache-Control: no-cache" -o caddy.tar.gz https://github.com/mholt/caddy/releases/download/v0.11.5/caddy_v0.11.5_linux_amd64.tar.gz \
  && tar -xvf /caddy/caddy.tar.gz -C /caddy \
- && chmod +x /caddy/caddy
- && rm -rf /caddy/init /caddy/EULA.txt /caddy/CHANGES.txt /caddy/LICENSES.txt /caddy/README.txt
+ && chmod +x /caddy/caddy \
+ && rm -rf /caddy/init /caddy/EULA.txt /caddy/CHANGES.txt /caddy/LICENSES.txt /caddy/README.txt \
  && echo -e "0.0.0.0:80 {\n    root /caddy/wwwroot\n    gzip\n    tls off\n    proxy /ws 127.0.0.1:30000 {\n        websocket\n        header_upstream -Origin\n    }\n}" > /caddy/Caddyfile \
  && chgrp -R 0 /v2ray /caddy \
  && chmod -R g+rwX /v2ray /caddy
