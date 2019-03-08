@@ -25,4 +25,4 @@ RUN chmod +x /run.sh /caddy/caddy
 
 ENTRYPOINT /run.sh
 
-EXPOSE 8080
+EXPOSE 80
