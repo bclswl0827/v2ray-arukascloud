@@ -24,5 +24,3 @@ ADD caddy /caddy/caddy
 RUN chmod +x /run.sh /caddy/caddy
 
 ENTRYPOINT /run.sh
-
-EXPOSE 80
