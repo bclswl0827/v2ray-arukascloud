@@ -1,34 +1,5 @@
-#!/bin/bash
-# Install V2Ray
-curl https://install.direct/go.sh | bash
-# Remove extra functions
-rm -rf /usr/bin/v2ray/geosite.dat /usr/bin/v2ray/geoip.dat
-# V2Ray new configuration
-cat <<-EOF > /etc/v2ray/config.json
-{
-  "inbounds": [
-  {
-    "port": ${PORT},
-    "protocol": "vmess",
-    "settings": {
-      "clients": [
-        {
-          "id": "${UUID}",
-          "alterId": 64
-        }
-      ]
-    },
-    "streamSettings": {
-      "network": "ws"
-    }
-  }
-  ],
-  "outbounds": [
-  {
-    "protocol": "freedom",
-    "settings": {}
-  }
-  ]
-}
-EOF
-/usr/bin/v2ray/v2ray -config=/etc/v2ray/config.json
+# Configure V2Ray	
+echo -e '{"inbound":{"port":80,"listen":"0.0.0.0","protocol":"vmess","settings":{"clients":[{"id":"uuid","alterId":64}]},"streamSettings":{"network":"ws","wsSettings":{"path":"/ws"}}},"outbound":{"protocol":"freedom","settings":{}}}' > /v2ray/config.json	
+sed -i "s/uuid/$UUID/g" /v2ray/config.json	
+# Run V2Ray	
+/v2ray/v2ray -config=/v2ray/config.json
